@@ -53,6 +53,24 @@ class Serial // A class for serial connection
             PurgeComm (fileHandle, PURGE_RXCLEAR);
             //}
             }
+
+        void readln (char output [])
+        {
+            DWORD inputSize = 0;
+            char in = '\0';
+
+            for (size_t i = 0; in && in != '\n';)
+            {
+                ReadFile (fileHandle, &in, 1, &inputSize, 0);
+                if (inputSize > 0)
+                {
+                    output [i] = in;
+                    i++;
+                }
+            }
+        }
+
+
     };
 
 
